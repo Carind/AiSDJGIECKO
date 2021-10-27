@@ -39,6 +39,7 @@ class LinkedList:
         newNode = Node(val)
         if self.head is None:
             self.head = newNode
+            self.tail = newNode
         else:
             newNode.next = self.head
             self.head = newNode
@@ -52,6 +53,15 @@ class LinkedList:
             current.next = newNode
         else:
             self.head = newNode
+            self.tail = newNode
+    def append2(self, val: Any):
+        newNode = Node(val)
+        if self.tail is None:
+            self.head = newNode
+            self.tail = newNode
+        else:
+            newNode.next = self.tail
+            self.tail = newNode
 
     def node(self, at: int) -> Any:
         id: int = 0
@@ -99,6 +109,10 @@ class LinkedList:
             while (current.next):
                 current = current.next
                 if current.value == after:
+                    if current.next.next == self.head:
+                        current.next = self.head
+                    if current.next.next == self.tail:
+                        current.next = self.tail
                     current.next = current.next.next
 
 
