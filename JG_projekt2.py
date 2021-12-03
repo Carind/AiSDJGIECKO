@@ -49,9 +49,6 @@ class BinaryNode:
         if(self.right_child != None):
             self.right_child.traverse_pre_order(visit)
 
-
-
-
 class BinaryTree:
     root: BinaryNode
 
@@ -65,31 +62,27 @@ class BinaryTree:
     def traverse_pre_order(self, visit: Callable[[Any], None]):
         self.root.traverse_pre_order(visit)
 
-def printTree(node:BinaryNode, level=0):
+def printTreeNode(node:BinaryNode, level=0):
     if node != None:
-        printTree(node.left_child, level + 1)
+        printTreeNode(node.left_child, level + 1)
         print(' ' * 2 * level + '->', node.value)
-        printTree(node.right_child, level + 1)
+        printTreeNode(node.right_child, level + 1)
 
-def right_line(tree:BinaryTree) -> List[BinaryNode]:
-    Out: List[BinaryNode]=[tree.root]
-    current = tree.root
-    level=0
-    Out.append(current)
-    while(current.left_child != None and current.right_child != None):
-        if(current.right_child != None):
-            current = current.right_child
-            level += 1
-            if(len(Out)<level):
-                Out.append(current)
-        if(current.left_child != None):
-            current = current.left_child
-            level += 1
-            if (len(Out) < level):
-                Out.append(current)
-        if(current.right_child == None and current.left_child == None):
-            current=Out[level-1]
-    return Out
+def printTree(tree:BinaryTree):
+    printTreeNode(tree.root)
+
+def right_lineNode(node:BinaryNode,level=0,out: List[BinaryNode]=[]) -> List[BinaryNode]:
+    if level == 0 and len(out)!=0:
+        out=[]
+    if len(out) == level and node != None:
+        out.append(node)
+    if node!=None:
+        right_lineNode(node.right_child, level + 1, out)
+        right_lineNode(node.left_child, level + 1,out)
+    return out
+
+def right_line(tree: BinaryTree) -> List[BinaryNode]:
+    return right_lineNode(tree.root)
 
 n1 = BinaryNode(1)
 n2 = BinaryNode(3)
@@ -98,9 +91,26 @@ n4 = BinaryNode(4)
 n5 = BinaryNode(6)
 n6 = BinaryNode(2,n4,n5)
 n7 = BinaryNode(10,n3,n6)
+tree1 = BinaryTree(n7)
 
-tree = BinaryTree(n7)
+printTree(tree1)
 
-#printTree(n7)
+list:List[BinaryNode] = []
+list = right_line(tree1)
+for i in list:
+    print(i)
+print("----------------------------")
 
-n8 = right_line(tree)
+n21 = BinaryNode(8)
+n22 = BinaryNode(9)
+n23 = BinaryNode(4,n21,n22)
+n24 = BinaryNode(5)
+n25 = BinaryNode(2,n23,n24)
+n26 = BinaryNode(7)
+n27 = BinaryNode(3,None,n26)
+n28 = BinaryNode(1,n25,n27)
+tree2= BinaryTree(n28)
+printTree(tree2)
+list2=right_line(tree2)
+for i in list2:
+    print(i)
