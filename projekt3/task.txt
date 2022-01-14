@@ -1,0 +1,5 @@
+Niech g będzie grafem nieważonym skierowanym (obiektem klasy Graph z lab 7) wypełnionym dowolnymi wierzchołkami.
+Przygotować funkcję paths_count(g: Graph, a: Any, b: Any) -> int, która zwróci liczbę wszystkich ścieżek pomiędzy
+ wierzchołkami a i b (zawierającymi wartości przekazane w argumentach a i b).
+
+Celem sprawdzenia rozwiązania przygotować 3 dowolne grafy testowe.
