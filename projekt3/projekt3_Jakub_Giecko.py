@@ -102,13 +102,21 @@ def multiplySqareMatrices(A,B):
 def paths_count(g: Graph, a: Any, b: Any) -> int:
     v_a = g.getVertex(a).index
     v_b = g.getVertex(b).index
-    x = len(g.adjacencies.keys())
     matrix=g.getAdjacencyMatrix()
     out=matrix[v_a][v_b]
     for i in range(1,len(g.adjacencies.keys())):
         matrix = multiplySqareMatrices(matrix,g.getAdjacencyMatrix())
         out += matrix[v_a][v_b]
+
+    matrix = multiplySqareMatrices(matrix,g.getAdjacencyMatrix())
+    if(matrix[v_a][v_b]!=0):
+        return-1
+
     return out
+
+print()
+print("-1 oznacza nieskończoność")
+print()
 
 test: Graph = Graph()
 test.create_vertex("a")
@@ -130,9 +138,10 @@ test2.create_vertex("c")
 test2.create_vertex("d")
 
 test2.createEdge(test2.getVertex("a"),test2.getVertex("b"))
+test2.createEdge(test2.getVertex("a"),test2.getVertex("d"))
+test2.createEdge(test2.getVertex("a"),test2.getVertex("a"))
 test2.createEdge(test2.getVertex("b"),test2.getVertex("c"))
 test2.createEdge(test2.getVertex("c"),test2.getVertex("d"))
-test2.createEdge(test2.getVertex("a"),test2.getVertex("d"))
 test2.createEdge(test2.getVertex("b"),test2.getVertex("d"))
 
 print(test2)
