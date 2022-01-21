@@ -104,14 +104,13 @@ def paths_count(g: Graph, a: Any, b: Any) -> int:
     v_b = g.getVertex(b).index
     matrix=g.getAdjacencyMatrix()
     out=matrix[v_a][v_b]
-    for i in range(1,len(g.adjacencies.keys())):
+    for i in range(len(g.adjacencies.keys())-1):
         matrix = multiplySqareMatrices(matrix,g.getAdjacencyMatrix())
         out += matrix[v_a][v_b]
-
-    matrix = multiplySqareMatrices(matrix,g.getAdjacencyMatrix())
-    if(matrix[v_a][v_b]!=0):
-        return-1
-
+    for i in range(len(g.adjacencies.keys())*len(g.adjacencies.keys())):
+        matrix = multiplySqareMatrices(matrix, g.getAdjacencyMatrix())
+        if (matrix[v_a][v_b] != 0):
+            return -1
     return out
 
 print()
